@@ -1,0 +1,19 @@
+.leaderdiv {
+  background-image: url("../../images/leaderback.png");
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-size: 100% 100%;
+  height: 84%;
+  padding: 40px 40px 10px;
+  color: white;
+  box-sizing: border-box;
+}
+.leaderheading {
+  height: 14%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.h1leader {
+  margin: 0px;
+}

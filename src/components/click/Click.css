@@ -1,0 +1,20 @@
+.clickdiv {
+  height: 14%;
+  display: flex;
+  justify-content: center;
+}
+.innerclick {
+  background-image: url("../../images/logout.png");
+  background-repeat: no-repeat;
+  background-position: right top;
+  background-size: 100% 100%;
+  height: 100%;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.clickheading {
+  color: white;
+  cursor: pointer;
+}

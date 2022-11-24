@@ -1,0 +1,100 @@
+.questionimg {
+  height: 74%;
+  padding-left: 50px;
+}
+.bothdiv {
+  height: 14%;
+  display: flex;
+  align-items: center;
+}
+.outerquestionimg {
+  width: 100%;
+  display: flex;
+}
+.innerquestionimg {
+  width: 40%;
+}
+.h3questionimg {
+  margin: 0px;
+  color: #8d444b;
+}
+.questionwriteimg {
+  height: 86%;
+  padding-top: 20px;
+  box-sizing: border-box;
+}
+.questionwriteinner {
+  height: 100%;
+  width: 500px;
+  padding-right: 50px;
+  font-size: 0px;
+  overflow: auto;
+}
+.teamupperdiv {
+  border-style: solid;
+  border-width: 0px 0px 10px 0px;
+  -moz-border-image: url(../../images/border.png) 0 169 16 161 round repeat;
+  -webkit-border-image: url(../../images/border.png) 0 169 16 161 round repeat;
+  -o-border-image: url(../../images/border.png) 0 169 16 161 round repeat;
+  border-image: url(../../images/border.png) 0 169 16 161 round repeat;
+  height: 22%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+.teamupperinside {
+  width: 100%;
+  display: flex;
+}
+.insidefirst {
+  width: 50%;
+  padding-left: 10px;
+  box-sizing: border-box;
+}
+.insidesecond {
+  width: 50%;
+  padding-right: 10px;
+  box-sizing: border-box;
+}
+.teaminnerdiv {
+  border-style: solid;
+  border-width: 0px 0px 10px 0px;
+  -moz-border-image: url(../../images/border.png) 0 169 16 161 round repeat;
+  -webkit-border-image: url(../../images/border.png) 0 169 16 161 round repeat;
+  -o-border-image: url(../../images/border.png) 0 169 16 161 round repeat;
+  border-image: url(../../images/border.png) 0 169 16 161 round repeat;
+  height: 50%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.forscroll {
+  height: 100%;
+  overflow: auto;
+}
+.countdiv {
+  height: 14%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.valuediv {
+  width: 50%;
+  color: #8d444b;
+  display: flex;
+  justify-content: space-evenly;
+}
+.sign {
+  border: 2px solid #8d444b;
+  border-radius: 50%;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+}
+.count {
+  width: 50px;
+  text-align: center;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

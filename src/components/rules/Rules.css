@@ -1,0 +1,23 @@
+.rulesdiv {
+  height: 14%;
+  display: flex;
+  align-items: center;
+}
+.rulesheading {
+  margin: 0px;
+  color: #8b444d;
+}
+.arraydiv {
+  height: 86%;
+  padding: 0px 20px 0px 30px;
+  overflow: auto;
+  box-sizing: border-box;
+}
+.contentdiv {
+  height: 50%;
+  display: flex;
+  align-items: center;
+}
+.boxcolor {
+  color: #8b444d;
+}

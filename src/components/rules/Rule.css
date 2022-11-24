@@ -1,0 +1,18 @@
+.rule {
+  padding: 10px 0px;
+  color: #8b444d;
+  display: flex;
+}
+.symbol {
+  width: 10%;
+}
+.innersymbol {
+  height: 24px;
+  width: 24%;
+}
+.pdiv {
+  width: 90%;
+}
+.remove {
+  margin: 0px;
+}

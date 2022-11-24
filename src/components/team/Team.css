@@ -1,0 +1,23 @@
+.teamdiv {
+  height: 36%;
+}
+.imageupper {
+  height: 70%;
+  display: flex;
+  justify-content: center;
+}
+.imagelower {
+  height: 100%;
+  width: 40%;
+  font-size: 0px;
+}
+.nameheading {
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.teamheading {
+  margin: 0px;
+  color: #8b444d;
+}

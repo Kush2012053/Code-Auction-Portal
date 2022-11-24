@@ -1,0 +1,12 @@
+.eachquestionbid {
+  height: 20%;
+  display: flex;
+  align-items: center;
+}
+.eachbidinside {
+  width: 100%;
+  display: flex;
+}
+.biddiv {
+  width: 50%;
+}

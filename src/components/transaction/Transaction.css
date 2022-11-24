@@ -1,0 +1,82 @@
+.transactiondiv {
+  height: 84%;
+  padding: 40px 40px 10px;
+  color: #8b444d;
+  box-sizing: border-box;
+}
+.transactionheading {
+  height: 14%;
+  padding: 0px 60px 0px 40px;
+  display: flex;
+  align-items: center;
+}
+.transactiontop {
+  width: 100%;
+  display: flex;
+}
+.history {
+  width: 50%;
+  text-align: left;
+}
+.remaining {
+  width: 50%;
+  text-align: right;
+}
+.nohistory {
+  height: 86%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.message {
+  text-align: center;
+}
+.transactionupscroll {
+  height: 18%;
+  padding: 10px 100px 0px;
+  color: #8b444d;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.transactiondownscroll {
+  width: 500px;
+  display: flex;
+}
+.leftbutton {
+  width: 8%;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+.transactionscroll {
+  width: 80%;
+  overflow-x: hidden;
+  display: flex;
+}
+.number {
+  border: 2px solid #8b444d;
+  border-radius: 10px;
+  height: 14px;
+  width: 14px;
+  padding: 10px;
+  margin: 0px 10px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+}
+.number:active {
+  background-color: #8b444d;
+  color: white;
+}
+.transactionh5 {
+  margin: 0px;
+  text-align: center;
+}
+.rightbutton {
+  width: 8%;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}

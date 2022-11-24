@@ -1,0 +1,48 @@
+.headerdiv {
+  height: 16%;
+  display: flex;
+  align-items: center;
+}
+.headerul {
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+}
+.headerli {
+  width: 12%;
+  display: flex;
+  align-items: center;
+}
+.navlink {
+  border-radius: 8px;
+  width: 100%;
+  padding: 10px 0px;
+  color: #8b444d;
+  text-align: center;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
+}
+.active {
+  background-color: #8b444d;
+  color: white;
+}
+.imgdiv {
+  font-size: 0px;
+}
+.belldiv {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.smalldiv {
+  height: 30px;
+  width: 30px;
+  font-size: 0px;
+  cursor: pointer;
+}

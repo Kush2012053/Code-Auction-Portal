@@ -37,6 +37,8 @@ const Login = () => {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("question", "");
       localStorage.setItem("page", 1);
+      localStorage.setItem("solveid", "");
+      localStorage.setItem("image", "");
       navigate("dashboard/rules");
     }
   };

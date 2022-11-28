@@ -1,69 +1,90 @@
 .solvemaindiv {
   height: 74%;
-}
-.solvefirst {
-  height: 60%;
-  width: 100%;
-  padding: 20px 100px 20px 0px;
-  box-sizing: border-box;
-}
-.imgdivsolve {
-  height: 100%;
-  padding-right: 120px;
-  font-size: 0px;
+  margin-right: 20px;
   overflow: auto;
 }
-.solvesecond {
-  height: 40%;
+.solveinnerdiv {
+  padding: 20px 0px;
 }
-.headingsolve {
-  height: 20%;
+.languagediv {
   display: flex;
+}
+.languagefirst {
+  height: 30px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
-.h3outputsolve {
+.languageh3 {
   margin: 0px;
   color: #8b444d;
 }
-.solvebottom {
-  height: 80%;
-  display: flex;
-  justify-content: space-between;
+.languagesecond {
+  width: 300px;
 }
-.bottomfirst {
-  width: 70%;
-}
-.formdiv {
-  height: 100%;
-  width: 100%;
-}
-.inputsolve {
+.languagewrite {
   border: 2px solid #8b444d;
-  height: 100%;
+  height: 30px;
   width: 100%;
-  padding: 10px;
+  padding: 4px;
   box-sizing: border-box;
-  outline: none;
-}
-.bottomsecond {
-  width: 24%;
   display: flex;
-  align-items: flex-end;
 }
-.bottomimg {
+.writefirst {
+  height: 100%;
+  width: 90%;
+  color: #8b444d;
+  font-weight: bold;
+}
+.writesecond {
+  height: 100%;
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dropdown {
+  background-color: #8b444d;
+  width: 100%;
+}
+.dropdownh5 {
+  border-bottom: 1px solid white;
+  width: 100%;
+  padding: 6px;
+  margin: 0px;
+  color: white;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+.solveimgdiv {
+  width: 600px;
+  padding: 20px 0px;
+  font-size: 0px;
+}
+.sourcecode {
+  margin: 0px;
+  color: #8b444d;
+}
+.editordiv {
+  height: 300px;
+  width: 600px;
+  padding: 20px 0px;
+  overflow: auto;
+}
+.solveclick {
   background-image: url("../../images/logout.png");
   background-repeat: no-repeat;
   background-position: right top;
   background-size: 100% 100%;
-  height: 40px;
-  width: 100%;
+  height: 60px;
+  width: 140px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.h4solve {
+.solvebutton {
   margin: 0px;
   color: white;
-  text-align: center;
 }

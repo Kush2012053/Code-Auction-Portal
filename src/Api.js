@@ -5,6 +5,8 @@ const Api = {
   transaction: url + "transactions",
   loginteam: url + "team",
   solve: url + "team/assignedQuestions",
+  language: url + "contest/languages",
+  submit: url + "contest/submitAnswer/",
 };
 
 export default Api;

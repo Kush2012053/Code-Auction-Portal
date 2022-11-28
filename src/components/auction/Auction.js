@@ -13,21 +13,7 @@ const Auction = () => {
   const [allQuestions, setAllQuestions] = useState([]);
   const [eachQuestion, setEachQuestion] = useState({});
   const [getBidArray, setGetBidArray] = useState([]);
-  const [bidValue, setBidValue] = useState(localStorage.balancepoint);
-
-  const eachClick = async () => {
-    const res = await axios
-      .get(Api.allquestion + localStorage.question, {
-        headers: { Authorization: `Bearer ${localStorage.token}` },
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    if (res) {
-      setEachQuestion(res.data.question[0]);
-      console.log(res);
-    }
-  };
+  const [bidValue, setBidValue] = useState();
 
   const getBidQuestion = async () => {
     const res = await axios
@@ -39,7 +25,21 @@ const Auction = () => {
       });
     if (res) {
       setGetBidArray(res.data.bids);
-      console.log(res);
+    }
+  };
+
+  const eachClick = async () => {
+    const res = await axios
+      .get(Api.allquestion + localStorage.question, {
+        headers: { Authorization: `Bearer ${localStorage.token}` },
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    if (res) {
+      setEachQuestion(res.data.question[0]);
+      getBidQuestion();
+      setBidValue(res.data.question[0].sold_at);
     }
   };
 
@@ -56,18 +56,14 @@ const Auction = () => {
         alert(err.response.data.message);
       });
     if (res) {
-      console.log(res);
       alert(res.data.message);
-      getBidQuestion();
-      setBidValue(localStorage.balancepoint);
     }
+    eachClick();
   };
 
-  console.log(localStorage.balancepoint);
   const eachClickQuestion = (id) => {
     localStorage.setItem("question", id);
     eachClick();
-    getBidQuestion();
   };
 
   const everyRender = async () => {
@@ -80,12 +76,10 @@ const Auction = () => {
       });
     if (res) {
       setAllQuestions(res.data.questions);
-      console.log(res);
       if (localStorage.question === "") {
         localStorage.setItem("question", res.data.questions[0]._id);
       }
       eachClick();
-      getBidQuestion();
     }
   };
 
@@ -173,7 +167,11 @@ const Auction = () => {
               </div>
               <div className="questionwriteimg">
                 <div className="questionwriteinner">
-                  <img src={questionimage} alt="questionimg" width="100%" />
+                  <img
+                    src={eachQuestion.img_url}
+                    alt="questionimg"
+                    width="100%"
+                  />
                 </div>
               </div>
             </div>
@@ -214,7 +212,7 @@ const Auction = () => {
                       height="100%"
                       width="100%"
                       onClick={() => {
-                        setBidValue(bidValue - 1);
+                        setBidValue(bidValue - 5);
                       }}
                     />
                   </div>
@@ -228,7 +226,7 @@ const Auction = () => {
                       height="100%"
                       width="100%"
                       onClick={() => {
-                        setBidValue(bidValue + 1);
+                        setBidValue(bidValue + 5);
                       }}
                     />
                   </div>

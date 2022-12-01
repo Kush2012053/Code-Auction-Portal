@@ -6,7 +6,6 @@ import teamname from "../../images/teamname.png";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Api from "../../Api";
-import questionimage from "../../images/question.jpg";
 import GetBid from "../getbid/GetBid";
 
 const Auction = () => {
@@ -14,6 +13,19 @@ const Auction = () => {
   const [eachQuestion, setEachQuestion] = useState({});
   const [getBidArray, setGetBidArray] = useState([]);
   const [bidValue, setBidValue] = useState();
+
+  const balancepoints = async () => {
+    const res = await axios
+      .get(Api.loginteam, {
+        headers: { Authorization: `Bearer ${localStorage.token}` },
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    if (res) {
+      localStorage.setItem("balancepoint", res.data.balance);
+    }
+  };
 
   const getBidQuestion = async () => {
     const res = await axios
@@ -39,7 +51,7 @@ const Auction = () => {
     if (res) {
       setEachQuestion(res.data.question[0]);
       getBidQuestion();
-      setBidValue(res.data.question[0].sold_at);
+      setBidValue(res.data.question[0].base_price);
     }
   };
 
@@ -118,6 +130,7 @@ const Auction = () => {
                           className="eachquestionscroll"
                           onClick={() => {
                             eachClickQuestion(val._id);
+                            balancepoints();
                           }}
                         >
                           <h4 className="h4questionscroll">{val.name}</h4>
@@ -155,12 +168,7 @@ const Auction = () => {
                 <div className="outerquestionimg">
                   <div className="innerquestionimg">
                     <h3 className="h3questionimg">
-                      Base Prize : {eachQuestion.base_price}
-                    </h3>
-                  </div>
-                  <div className="innerquestionimg">
-                    <h3 className="h3questionimg">
-                      Current Prize : {eachQuestion.sold_at}
+                      Base Price : {eachQuestion.base_price}
                     </h3>
                   </div>
                 </div>
@@ -212,12 +220,19 @@ const Auction = () => {
                       height="100%"
                       width="100%"
                       onClick={() => {
-                        setBidValue(bidValue - 5);
+                        setBidValue(parseInt(bidValue) - 1);
                       }}
                     />
                   </div>
                   <div className="count">
-                    <b>{bidValue}</b>
+                    <input
+                      className="bidvalueinput"
+                      type="text"
+                      value={bidValue}
+                      onChange={(e) => {
+                        setBidValue(e.target.value);
+                      }}
+                    />
                   </div>
                   <div className="sign">
                     <img
@@ -226,7 +241,7 @@ const Auction = () => {
                       height="100%"
                       width="100%"
                       onClick={() => {
-                        setBidValue(bidValue + 5);
+                        setBidValue(parseInt(bidValue) + 1);
                       }}
                     />
                   </div>

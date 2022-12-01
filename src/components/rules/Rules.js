@@ -26,7 +26,6 @@ const Rules = () => {
         console.log(err);
       });
     if (res) {
-      console.log(res);
       localStorage.setItem("nameteam", res.data.team_name);
       localStorage.setItem("balancepoint", res.data.balance);
       setData(res.data);

@@ -5,55 +5,26 @@ import axios from "axios";
 import Api from "../../Api";
 
 const Transaction = () => {
-  const [pagesCount, setPagesCount] = useState();
   const [transactionArray, setTransactionArray] = useState([]);
+  const [total, setTotal] = useState();
 
   const everyRender = async () => {
     const res = await axios
-      .get(Api.transaction + `?page=${localStorage.page}&limit=10`, {
+      .get(Api.transaction + "?page=1&limit=5000", {
         headers: { Authorization: `Bearer ${localStorage.token}` },
       })
       .catch((err) => {
         console.log(err);
       });
     if (res) {
-      console.log(res);
-      setPagesCount(res.data.total);
       setTransactionArray(res.data.transactions);
+      setTotal(res.data.total);
     }
   };
 
   useEffect(() => {
     everyRender();
   }, []);
-
-  const leftSlide = () => {
-    const slider = document.getElementById("arrowscroll");
-    slider.scrollLeft = slider.scrollLeft - 200;
-  };
-
-  const rightSlide = () => {
-    const slider = document.getElementById("arrowscroll");
-    slider.scrollLeft = slider.scrollLeft + 200;
-  };
-  const pageClick = (i) => {
-    localStorage.setItem("page", i);
-    everyRender();
-  };
-  var rows = [];
-
-  for (var i = 1; i <= Math.ceil(pagesCount / 10); i++) {
-    rows.push(
-      <div
-        className="number"
-        onClick={() => {
-          pageClick(i);
-        }}
-      >
-        <h5 className="transactionh5">{i}</h5>
-      </div>
-    );
-  }
 
   return (
     <>
@@ -68,7 +39,7 @@ const Transaction = () => {
             </div>
           </div>
         </div>
-        {pagesCount === 0 ? (
+        {total === 0 ? (
           <div className="nohistory">
             <div className="message">
               <h2>
@@ -95,37 +66,16 @@ const Transaction = () => {
               </div>
             </div>
             <div className="generalbottom">
-              {transactionArray.map((val) => {
+              {transactionArray.map((val, index) => {
                 return (
                   <TransactionCommon
-                    first="S.No."
+                    first={index + 1}
                     second={val.description}
                     third={val.from.team_name}
                     fourth={val.amount}
                   />
                 );
               })}
-            </div>
-            <div className="transactionupscroll">
-              <div className="transactiondownscroll">
-                <div className="leftbutton">
-                  <i
-                    class="bi bi-arrow-left-circle-fill"
-                    style={{ fontSize: "24px", cursor: "pointer" }}
-                    onClick={leftSlide}
-                  ></i>
-                </div>
-                <div className="transactionscroll" id="arrowscroll">
-                  {rows}
-                </div>
-                <div className="rightbutton">
-                  <i
-                    class="bi bi-arrow-right-circle-fill"
-                    style={{ fontSize: "24px", cursor: "pointer" }}
-                    onClick={rightSlide}
-                  ></i>
-                </div>
-              </div>
             </div>
           </div>
         )}

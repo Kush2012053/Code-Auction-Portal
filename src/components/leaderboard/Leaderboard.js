@@ -26,6 +26,57 @@ const Leaderboard = () => {
             <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
             <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
             <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 .transactiondiv {
   height: 84%;
-  padding: 40px 40px 10px;
+  padding: 40px;
   color: #8b444d;
   box-sizing: border-box;
 }
@@ -31,30 +31,7 @@
 .message {
   text-align: center;
 }
-.transactionupscroll {
-  height: 18%;
-  padding: 10px 100px 0px;
-  color: #8b444d;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.transactiondownscroll {
-  width: 500px;
-  display: flex;
-}
-.leftbutton {
-  width: 8%;
-  display: flex;
-  justify-content: left;
-  align-items: center;
-}
-.transactionscroll {
-  width: 80%;
-  overflow-x: hidden;
-  display: flex;
-}
+
 .number {
   border: 2px solid #8b444d;
   border-radius: 10px;
@@ -73,10 +50,4 @@
 .transactionh5 {
   margin: 0px;
   text-align: center;
-}
-.rightbutton {
-  width: 8%;
-  display: flex;
-  justify-content: right;
-  align-items: center;
 }

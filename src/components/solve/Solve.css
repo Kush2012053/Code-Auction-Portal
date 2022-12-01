@@ -119,6 +119,19 @@
   color: #8b444d;
   margin: 0px;
   word-wrap: break-word;
+  font-size: 20px;
+  font-weight: 600;
+}
+.submittextarea {
+  height: 150px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: #8b444d;
+  font-size: 20px;
+}
+.submittextarea:focus {
+  outline: none;
 }
 .uppersolve {
   height: 90%;
@@ -176,20 +189,20 @@
   justify-content: space-between;
 }
 .tickinnerfirst {
-  width: 100px;
-  height: 30px;
+  width: 120px;
+  height: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.tickh3 {
+.tickh4 {
   margin: 0px;
   color: #8b444d;
   text-align: center;
 }
 .tickinnersecond {
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
   border: 2px solid #8b444d;
   box-sizing: border-box;
   display: flex;

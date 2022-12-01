@@ -7,6 +7,8 @@ const Api = {
   solve: url + "team/assignedQuestions",
   language: url + "contest/languages",
   submit: url + "contest/submitAnswer/",
+  leaderboard: url + "leaderboard",
+  assign: url + "team/assignedQuestion/",
 };
 
 export default Api;

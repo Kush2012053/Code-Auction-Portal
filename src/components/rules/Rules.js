@@ -14,6 +14,10 @@ const Rules = () => {
 
   const clickLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("balancepoint");
+    localStorage.removeItem("question");
+    localStorage.removeItem("solveid");
+    localStorage.removeItem("nameteam");
     navigate("/");
   };
 

@@ -7,12 +7,19 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Api from "../../Api";
 import GetBid from "../getbid/GetBid";
+import beep from "../../images/beep.mpeg";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Auction = () => {
   const [allQuestions, setAllQuestions] = useState([]);
   const [eachQuestion, setEachQuestion] = useState({});
   const [getBidArray, setGetBidArray] = useState([]);
   const [bidValue, setBidValue] = useState();
+
+  const play = () => {
+    new Audio(beep).play();
+  };
 
   const balancepoints = async () => {
     const res = await axios
@@ -65,10 +72,29 @@ const Auction = () => {
       })
       .catch((err) => {
         console.log(err);
-        alert(err.response.data.message);
+        toast.info(err.response.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
       });
     if (res) {
-      alert(res.data.message);
+      play();
+      toast.success(res.data.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
     eachClick();
   };
@@ -159,7 +185,9 @@ const Auction = () => {
                   />
                 </div>
                 <div className="h3imgdiv">
-                  <h3 className="h3headingdiv">Problem : </h3>
+                  <h3 className="h3headingdiv">
+                    Problem : {eachQuestion.name}
+                  </h3>
                 </div>
               </div>
             </div>
@@ -247,6 +275,7 @@ const Auction = () => {
                   </div>
                 </div>
               </div>
+              <ToastContainer />
               <Click val="Place Bid" function={placeBid} />
             </div>
           </div>

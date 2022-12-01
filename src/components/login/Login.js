@@ -6,6 +6,8 @@ import "./Login.css";
 import brllogo from "../../images/brllogo.png";
 import teamname from "../../images/teamname.png";
 import Spinner from "react-spinner-material";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -31,16 +33,32 @@ const Login = () => {
     };
     const res = await axios.post(Api.login, data).catch((err) => {
       setLoader(false);
-      alert(err.response.data.message);
+      toast.error(err.response.data.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     });
     if (res) {
       setLoader(false);
-      alert(res.data.message);
+      toast.success(res.data.message, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("question", "");
-      localStorage.setItem("page", 1);
       localStorage.setItem("solveid", "");
-      localStorage.setItem("image", "");
       navigate("dashboard/rules");
     }
   };
@@ -88,7 +106,7 @@ const Login = () => {
             <br />
             <br />
             <br />
-
+            <ToastContainer />
             {!loader && (
               <input
                 type="submit"

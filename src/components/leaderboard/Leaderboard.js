@@ -1,7 +1,29 @@
 import LeaderboardCommon from "../leaderboardcommon/LeaderboardCommon";
 import "./Leaderboard.css";
+import axios from "axios";
+import Api from "../../Api";
+import { useEffect, useState } from "react";
 
 const Leaderboard = () => {
+  const [lead, setLead] = useState([]);
+  const everyLeaderBoard = async () => {
+    const res = await axios
+      .get(Api.leaderboard, {
+        headers: { Authorization: `Bearer ${localStorage.token}` },
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    if (res) {
+      setLead(res.data);
+      console.log(res);
+    }
+  };
+
+  useEffect(() => {
+    everyLeaderBoard();
+  }, []);
+
   return (
     <>
       <div className="leaderdiv">
@@ -23,60 +45,15 @@ const Leaderboard = () => {
             </div>
           </div>
           <div className="generalbottom">
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
-            <LeaderboardCommon first="S.No." second="Team Name" third="Price" />
+            {lead.map((val) => {
+              return (
+                <LeaderboardCommon
+                  first={val.rank}
+                  second={val.team_name}
+                  third={val.score / 100}
+                />
+              );
+            })}
           </div>
         </div>
       </div>

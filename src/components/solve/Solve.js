@@ -4,8 +4,9 @@ import Api from "../../Api";
 import teamname from "../../images/teamname.png";
 import axios from "axios";
 import Editor from "@monaco-editor/react";
-import questionimg from "../../images/question.jpg";
 import Spinner from "react-spinner-material";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Solve = () => {
   const [allQuestionsSolve, setAllQuestionsSolve] = useState([]);
@@ -23,6 +24,22 @@ const Solve = () => {
   const [stderr, setStdErr] = useState("");
   const [stdout, setStdOut] = useState("");
   const [error, setError] = useState("");
+  const [questionDetails, setQuestionDetails] = useState({});
+
+  const eachSolve = async () => {
+    const res = await axios
+      .get(Api.assign + localStorage.solveid, {
+        headers: { Authorization: `Bearer ${localStorage.token}` },
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    if (res) {
+      console.log(res);
+      setCodeValue(res.data.last_submission);
+      setQuestionDetails(res.data.question);
+    }
+  };
 
   const everyStars = async () => {
     const res = await axios
@@ -50,9 +67,41 @@ const Solve = () => {
       .catch((err) => {
         console.log(err);
         setLoad(false);
-        alert(err.response.data.message);
+        toast.error(err.response.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
       });
     if (res) {
+      if (res.data.message === "Not Accepted") {
+        toast.error(res.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      } else {
+        toast.success(res.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
       console.log(res);
       setLoad(false);
       setExpectedOutput(res.data.result.expected_output);
@@ -61,7 +110,6 @@ const Solve = () => {
       setStdOut(res.data.result.stdout);
       setError(res.data.result.status.description);
       setShow("block");
-      alert(res.data.message);
     }
   };
 
@@ -100,8 +148,8 @@ const Solve = () => {
       setAllQuestionsSolve(res.data);
       if (localStorage.solveid === "") {
         localStorage.setItem("solveid", res.data[0].question_id._id);
-        localStorage.setItem("image", res.data[0].question_id.img_url);
       }
+      eachSolve();
     }
   };
 
@@ -145,15 +193,11 @@ const Solve = () => {
                               "solveid",
                               val.question_id._id
                             );
-                            localStorage.setItem(
-                              "image",
-                              val.question_id.img_url
-                            );
+                            eachSolve();
                             setIcon("bi bi-caret-down-fill");
                             setProperty("none");
                             setLanguageName("");
                             setLanguageId();
-                            setCodeValue("");
                             setShow("none");
                           }}
                         >
@@ -185,14 +229,20 @@ const Solve = () => {
                   />
                 </div>
                 <div className="h3imgdiv">
-                  <h3 className="h3headingdiv">Problem : </h3>
+                  <h3 className="h3headingdiv">
+                    Problem : {questionDetails.name}
+                  </h3>
                 </div>
               </div>
             </div>
             <div className="solvemaindiv">
               <div className="solveinnerdiv">
                 <div className="solveimgdiv">
-                  <img src={questionimg} alt="questionimg" width="100%" />
+                  <img
+                    src={questionDetails.img_url}
+                    alt="questionimg"
+                    width="100%"
+                  />
                 </div>
                 <div className="languagediv">
                   <div className="languagefirst">
@@ -243,12 +293,14 @@ const Solve = () => {
                     value={atob(codeValue)}
                   />
                 </div>
+                <ToastContainer />
                 {!load && (
                   <div
                     className="solveclick"
                     onClick={() => {
                       setLoad(true);
                       submitAnswer();
+                      eachSolve();
                       solveEveryRender();
                       everyStars();
                     }}
@@ -276,11 +328,17 @@ const Solve = () => {
                   <div className="outputdiv">
                     <div className="outputdivinner">
                       <h3 className="outputh3">Expected Output</h3>
-                      <p className="paraoutput">{atob(expectedOutput)}</p>
+                      <textarea
+                        className="submittextarea"
+                        value={atob(expectedOutput)}
+                      />
                     </div>
                     <div className="outputdivmiddle">
                       <h3 className="outputh3">Standard Input</h3>
-                      <p className="paraoutput">{atob(stdin)}</p>
+                      <textarea
+                        className="submittextarea"
+                        value={atob(stdin)}
+                      />
                     </div>
                     <div className="outputdivinner">
                       <h3 className="outputh3">Standard Output</h3>
@@ -297,23 +355,54 @@ const Solve = () => {
                         if (stdout !== null) {
                           return (
                             <>
-                              <p className="paraoutput">{atob(stdout)}</p>
+                              <textarea
+                                className="submittextarea"
+                                value={atob(stdout)}
+                              />
                             </>
                           );
                         }
                       })()}
-                      {(() => {
+                      {/*{(() => {
                         if (stderr !== null) {
                           return (
                             <>
                               <h3 className="outputh3">Standard Error</h3>
-                              <p className="paraoutput">{atob(stderr)}</p>
+                              <textarea
+                                className="submittextarea"
+                                value={atob(stderr)}
+                              />
                             </>
                           );
                         }
-                      })()}
+                      })()}*/}
                     </div>
                   </div>
+                  {(() => {
+                    if (stderr !== null) {
+                      return (
+                        <>
+                          <div>
+                            <h3
+                              className="outputh3"
+                              style={{ textAlign: "left" }}
+                            >
+                              Standard Error
+                            </h3>
+                            <textarea
+                              value={atob(stderr)}
+                              className="submittextarea"
+                              style={{
+                                fontSize: "16px",
+                                color: "red",
+                                boxSizing: "border-box",
+                              }}
+                            />
+                          </div>
+                        </>
+                      );
+                    }
+                  })()}
                 </div>
               </div>
             </div>
@@ -343,7 +432,7 @@ const Solve = () => {
                         <div className="tickouter">
                           <div className="tickinner">
                             <div className="tickinnerfirst">
-                              <h3 className="tickh3">{val.question_id.name}</h3>
+                              <h4 className="tickh4">{val.question_id.name}</h4>
                             </div>
                             <div className="tickinnersecond">
                               {(() => {

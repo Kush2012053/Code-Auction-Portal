@@ -42,7 +42,7 @@ const Transaction = () => {
         {total === 0 ? (
           <div className="nohistory">
             <div className="message">
-              <h2>
+              <h2 className="tracking-in-contract">
                 You have no Transaction <br /> history yet.
               </h2>
             </div>
@@ -73,6 +73,7 @@ const Transaction = () => {
                     second={val.description}
                     third={val.from.team_name}
                     fourth={val.amount}
+                    color="#8b444d"
                   />
                 );
               })}

@@ -16,7 +16,6 @@ const Solve = () => {
   const [codeValue, setCodeValue] = useState("");
   const [languageName, setLanguageName] = useState("Select Language");
   const [languageId, setLanguageId] = useState();
-  const [stars, setStars] = useState(0);
   const [show, setShow] = useState("none");
   const [load, setLoad] = useState(false);
   const [expectedOutput, setExpectedOutput] = useState("");
@@ -38,19 +37,6 @@ const Solve = () => {
       console.log(res);
       setCodeValue(res.data.last_submission);
       setQuestionDetails(res.data.question);
-    }
-  };
-
-  const everyStars = async () => {
-    const res = await axios
-      .get(Api.loginteam, {
-        headers: { Authorization: `Bearer ${localStorage.token}` },
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    if (res) {
-      setStars(res.data.score / 100);
     }
   };
 
@@ -79,8 +65,8 @@ const Solve = () => {
         });
       });
     if (res) {
-      if (res.data.message === "Not Accepted") {
-        toast.error(res.data.message, {
+      if (res.data.message === "Accepted!! 3/3 private test cases passing.") {
+        toast.success(res.data.message, {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -91,7 +77,7 @@ const Solve = () => {
           theme: "colored",
         });
       } else {
-        toast.success(res.data.message, {
+        toast.error(res.data.message, {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -170,200 +156,217 @@ const Solve = () => {
 
   return (
     <>
-      <div className="boxdiv">
-        <div className="commondiv">
-          <div className="common">
-            <div className="scrolldiv">
-              <div className="innerscrolldiv">
-                <div className="lefticon">
-                  <i
-                    class="bi bi-arrow-left-circle-fill"
-                    style={{ fontSize: "24px", cursor: "pointer" }}
-                    onClick={slideLeftSolve}
-                  ></i>
-                </div>
-                <div className="questionscroll" id="scrollidsolve">
-                  {allQuestionsSolve.map((val) => {
-                    return (
-                      <>
-                        <div
-                          className="eachquestionscroll"
-                          onClick={() => {
-                            localStorage.setItem(
-                              "solveid",
-                              val.question_id._id
-                            );
-                            eachSolve();
-                            setIcon("bi bi-caret-down-fill");
-                            setProperty("none");
-                            setLanguageName("");
-                            setLanguageId();
-                            setShow("none");
-                          }}
-                        >
-                          <h4 className="h4questionscroll">
-                            {val.question_id.name}
-                          </h4>
-                        </div>
-                      </>
-                    );
-                  })}
-                </div>
-                <div className="righticon">
-                  <i
-                    class="bi bi-arrow-right-circle-fill"
-                    style={{ fontSize: "24px", cursor: "pointer" }}
-                    onClick={slideRightSolve}
-                  ></i>
-                </div>
-              </div>
-            </div>
-            <div className="problemimgdiv">
-              <div className="probleminnerdiv">
-                <div className="imgupperdiv">
-                  <img
-                    src={teamname}
-                    alt="teamname"
-                    height="100%"
-                    width="100%"
-                  />
-                </div>
-                <div className="h3imgdiv">
-                  <h3 className="h3headingdiv">
-                    Problem : {questionDetails.name}
-                  </h3>
-                </div>
-              </div>
-            </div>
-            <div className="solvemaindiv">
-              <div className="solveinnerdiv">
-                <div className="solveimgdiv">
-                  <img
-                    src={questionDetails.img_url}
-                    alt="questionimg"
-                    width="100%"
-                  />
-                </div>
-                <div className="languagediv">
-                  <div className="languagefirst">
-                    <h3 className="languageh3">Language: </h3>
+      {allQuestionsSolve.length === 0 ? (
+        <div className="nobuy">
+          <h1 className="tracking-in-contract">Please buy a question.</h1>
+        </div>
+      ) : (
+        <div className="boxdiv">
+          <div className="commondiv">
+            <div className="common">
+              <div className="scrolldiv">
+                <div className="innerscrolldiv">
+                  <div className="lefticon">
+                    <i
+                      class="bi bi-arrow-left-circle-fill"
+                      style={{ fontSize: "24px", cursor: "pointer" }}
+                      onClick={slideLeftSolve}
+                    ></i>
                   </div>
-                  <div className="languagesecond">
-                    <div className="languagewrite">
-                      <div className="writefirst">{languageName}</div>
-                      <div className="writesecond">
-                        <i
-                          class={icon}
-                          style={{
-                            height: "16px",
-                            width: "16px",
-                            color: "#8b444d",
-                            cursor: "pointer",
-                          }}
-                          onClick={iconClick}
-                        />
-                      </div>
-                    </div>
-                    <div className="dropdown" style={{ display: property }}>
-                      {language.map((val) => {
-                        return (
-                          <h5
-                            className="dropdownh5"
+                  <div className="questionscroll" id="scrollidsolve">
+                    {allQuestionsSolve.map((val) => {
+                      return (
+                        <>
+                          <div
+                            className="eachquestionscroll"
                             onClick={() => {
-                              setLanguageName(val.name);
-                              setLanguageId(val.id);
-                              iconClick();
+                              localStorage.setItem(
+                                "solveid",
+                                val.question_id._id
+                              );
+                              eachSolve();
+                              setIcon("bi bi-caret-down-fill");
+                              setProperty("none");
+                              setLanguageName("Select Language");
+                              setLanguageId();
+                              setShow("none");
                             }}
                           >
-                            {val.name}
-                          </h5>
-                        );
-                      })}
-                    </div>
+                            <h4 className="h4questionscroll">
+                              {val.question_id.name}
+                            </h4>
+                          </div>
+                        </>
+                      );
+                    })}
+                  </div>
+                  <div className="righticon">
+                    <i
+                      class="bi bi-arrow-right-circle-fill"
+                      style={{ fontSize: "24px", cursor: "pointer" }}
+                      onClick={slideRightSolve}
+                    ></i>
                   </div>
                 </div>
-                <h3 className="sourcecode">Source Code:</h3>
-                <div className="editordiv">
-                  <Editor
-                    style={{ height: "100%", width: "100%" }}
-                    theme="vs-dark"
-                    onChange={(e) => {
-                      setCodeValue(btoa(e));
-                    }}
-                    value={atob(codeValue)}
-                  />
-                </div>
-                <ToastContainer />
-                {!load && (
-                  <div
-                    className="solveclick"
-                    onClick={() => {
-                      setLoad(true);
-                      submitAnswer();
-                      eachSolve();
-                      solveEveryRender();
-                      everyStars();
-                    }}
-                  >
-                    <h3 className="solvebutton">Submit</h3>
-                  </div>
-                )}
-                {load && (
-                  <div
-                    className="solveclick"
-                    onClick={() => {
-                      submitAnswer();
-                    }}
-                  >
-                    <Spinner
-                      radius={20}
-                      color={"white"}
-                      stroke={3}
-                      visible={true}
+              </div>
+              <div className="problemimgdiv">
+                <div className="probleminnerdiv">
+                  <div className="imgupperdiv">
+                    <img
+                      src={teamname}
+                      alt="teamname"
+                      height="100%"
+                      width="100%"
                     />
                   </div>
-                )}
-                <div style={{ display: show }}>
-                  <h3 className="h3testcase">Test Run Results : {error}</h3>
-                  <div className="outputdiv">
-                    <div className="outputdivinner">
-                      <h3 className="outputh3">Expected Output</h3>
-                      <textarea
-                        className="submittextarea"
-                        value={atob(expectedOutput)}
+                  <div className="h3imgdiv">
+                    <h3 className="h3headingdiv">
+                      Problem : {questionDetails.name}
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div className="solvemaindiv">
+                <div className="solveinnerdiv">
+                  <div className="solveimgdiv">
+                    <img
+                      src={questionDetails.img_url}
+                      alt="questionimg"
+                      width="100%"
+                    />
+                  </div>
+                  <div className="languagediv">
+                    <div className="languagefirst">
+                      <h3 className="languageh3">Language: </h3>
+                    </div>
+                    <div className="languagesecond">
+                      <div className="languagewrite">
+                        <div className="writefirst">{languageName}</div>
+                        <div className="writesecond">
+                          <i
+                            class={icon}
+                            style={{
+                              height: "16px",
+                              width: "16px",
+                              color: "#8b444d",
+                              cursor: "pointer",
+                            }}
+                            onClick={iconClick}
+                          />
+                        </div>
+                      </div>
+                      <div className="dropdown" style={{ display: property }}>
+                        {language.map((val) => {
+                          return (
+                            <h5
+                              className="dropdownh5"
+                              onClick={() => {
+                                setLanguageName(val.name);
+                                setLanguageId(val.id);
+                                iconClick();
+                              }}
+                            >
+                              {val.name}
+                            </h5>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                  <h3 className="sourcecode">Source Code:</h3>
+                  <div className="editordiv">
+                    <Editor
+                      style={{ height: "100%", width: "100%" }}
+                      theme="vs-dark"
+                      onChange={(e) => {
+                        setCodeValue(btoa(e));
+                      }}
+                      value={atob(codeValue)}
+                    />
+                  </div>
+                  <ToastContainer />
+                  {!load && (
+                    <div
+                      className="solveclick"
+                      onClick={() => {
+                        if (languageName === "Select Language") {
+                          toast.warning("Please choose a language to use", {
+                            position: "top-center",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "colored",
+                          });
+                        } else {
+                          setLoad(true);
+                          submitAnswer();
+                          eachSolve();
+                          solveEveryRender();
+                        }
+                      }}
+                    >
+                      <h3 className="solvebutton">Submit</h3>
+                    </div>
+                  )}
+                  {load && (
+                    <div
+                      className="solveclick"
+                      onClick={() => {
+                        submitAnswer();
+                      }}
+                    >
+                      <Spinner
+                        radius={20}
+                        color={"white"}
+                        stroke={3}
+                        visible={true}
                       />
                     </div>
-                    <div className="outputdivmiddle">
-                      <h3 className="outputh3">Standard Input</h3>
-                      <textarea
-                        className="submittextarea"
-                        value={atob(stdin)}
-                      />
-                    </div>
-                    <div className="outputdivinner">
-                      <h3 className="outputh3">Standard Output</h3>
-                      {(() => {
-                        if (stdout === null) {
-                          return (
-                            <>
-                              <p className="paraoutput">NULL</p>
-                            </>
-                          );
-                        }
-                      })()}
-                      {(() => {
-                        if (stdout !== null) {
-                          return (
-                            <>
-                              <textarea
-                                className="submittextarea"
-                                value={atob(stdout)}
-                              />
-                            </>
-                          );
-                        }
-                      })()}
-                      {/*{(() => {
+                  )}
+                  <div style={{ display: show }}>
+                    <h3 className="h3testcase">Test Run Results : {error}</h3>
+                    <div className="outputdiv">
+                      <div className="outputdivinner">
+                        <h3 className="outputh3">Expected Output</h3>
+                        <textarea
+                          className="submittextarea"
+                          value={atob(expectedOutput)}
+                        />
+                      </div>
+                      <div className="outputdivmiddle">
+                        <h3 className="outputh3">Standard Input</h3>
+                        <textarea
+                          className="submittextarea"
+                          value={atob(stdin)}
+                        />
+                      </div>
+                      <div className="outputdivinner">
+                        <h3 className="outputh3">Standard Output</h3>
+                        {(() => {
+                          if (stdout === null) {
+                            return (
+                              <>
+                                <p className="paraoutput">NULL</p>
+                              </>
+                            );
+                          }
+                        })()}
+                        {(() => {
+                          if (stdout !== null) {
+                            return (
+                              <>
+                                <textarea
+                                  className="submittextarea"
+                                  value={atob(stdout)}
+                                />
+                              </>
+                            );
+                          }
+                        })()}
+                        {/*{(() => {
                         if (stderr !== null) {
                           return (
                             <>
@@ -376,100 +379,103 @@ const Solve = () => {
                           );
                         }
                       })()}*/}
+                      </div>
                     </div>
+                    {(() => {
+                      if (stderr !== null) {
+                        return (
+                          <>
+                            <div>
+                              <h3
+                                className="outputh3"
+                                style={{ textAlign: "left" }}
+                              >
+                                Standard Error
+                              </h3>
+                              <textarea
+                                value={atob(stderr)}
+                                className="submittextarea"
+                                style={{
+                                  fontSize: "16px",
+                                  color: "red",
+                                  boxSizing: "border-box",
+                                }}
+                              />
+                            </div>
+                          </>
+                        );
+                      }
+                    })()}
                   </div>
-                  {(() => {
-                    if (stderr !== null) {
-                      return (
-                        <>
-                          <div>
-                            <h3
-                              className="outputh3"
-                              style={{ textAlign: "left" }}
-                            >
-                              Standard Error
-                            </h3>
-                            <textarea
-                              value={atob(stderr)}
-                              className="submittextarea"
-                              style={{
-                                fontSize: "16px",
-                                color: "red",
-                                boxSizing: "border-box",
-                              }}
-                            />
-                          </div>
-                        </>
-                      );
-                    }
-                  })()}
                 </div>
               </div>
             </div>
-          </div>
-          <div className="commonbox">
-            <div className="imagediv">
-              <div className="uppersolve">
-                <div className="submitimgdiv">
-                  <div className="submitimginner">
-                    <img
-                      src={teamname}
-                      alt="teamname"
-                      height="100%"
-                      width="100%"
-                    />
+            <div className="commonbox">
+              <div className="imagediv">
+                <div className="uppersolve">
+                  <div className="submitimgdiv">
+                    <div className="submitimginner">
+                      <img
+                        src={teamname}
+                        alt="teamname"
+                        height="100%"
+                        width="100%"
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="submitteamouter">
-                  <div className="submitteaminner">
-                    <h2 className="h2submitteam">{localStorage.nameteam}</h2>
+                  <div className="submitteamouter">
+                    <div className="submitteaminner">
+                      <h2 className="h2submitteam">{localStorage.nameteam}</h2>
+                    </div>
                   </div>
-                </div>
-                <div className="submitstatusouter">
-                  {allQuestionsSolve.map((val) => {
-                    return (
-                      <>
-                        <div className="tickouter">
-                          <div className="tickinner">
-                            <div className="tickinnerfirst">
-                              <h4 className="tickh4">{val.question_id.name}</h4>
-                            </div>
-                            <div className="tickinnersecond">
-                              {(() => {
-                                if (val.status !== "pending") {
-                                  return (
-                                    <i
-                                      class="bi bi-check-lg"
-                                      style={{
-                                        color: "#8b444d",
-                                        fontSize: "20px",
-                                      }}
-                                    ></i>
-                                  );
-                                }
-                              })()}
+                  <div className="submitstatusouter">
+                    {allQuestionsSolve.map((val) => {
+                      return (
+                        <>
+                          <div className="tickouter">
+                            <div className="tickinner">
+                              <div className="tickinnerfirst">
+                                <h4 className="tickh4">
+                                  {val.question_id.name}
+                                </h4>
+                              </div>
+                              <div className="tickinnersecond">
+                                {(() => {
+                                  if (val.status !== "pending") {
+                                    return (
+                                      <i
+                                        class="bi bi-check-lg"
+                                        style={{
+                                          color: "#8b444d",
+                                          fontSize: "20px",
+                                        }}
+                                      ></i>
+                                    );
+                                  }
+                                })()}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </>
-                    );
-                  })}
-                </div>
-              </div>
-              <div className="lowersolve">
-                <div className="lowerinnersolve">
-                  <div className="innersolvechild">
-                    <h3 className="h3solve">Stars</h3>
+                        </>
+                      );
+                    })}
                   </div>
-                  <div className="innersolvechild">
-                    <h3 className="h3solve">{stars}</h3>
+                </div>
+                <div className="lowersolve">
+                  <div className="lowerinnersolve">
+                    <div className="innersolvechild">
+                      <h3 className="h3solve">Stars</h3>
+                    </div>
+                    <div className="innersolvechild">
+                      <h3 className="h3solve">{localStorage.stars}</h3>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

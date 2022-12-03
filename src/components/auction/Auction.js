@@ -10,6 +10,7 @@ import GetBid from "../getbid/GetBid";
 import beep from "../../images/beep.mpeg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import io from "socket.io-client";
 
 const Auction = () => {
   const [allQuestions, setAllQuestions] = useState([]);
@@ -85,7 +86,8 @@ const Auction = () => {
       });
     if (res) {
       play();
-      toast.success(res.data.message, {
+      {
+        /*toast.success(res.data.message, {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
@@ -94,7 +96,8 @@ const Auction = () => {
         draggable: true,
         progress: undefined,
         theme: "colored",
-      });
+      });*/
+      }
     }
     eachClick();
   };
@@ -134,6 +137,83 @@ const Auction = () => {
     const slider = document.getElementById("scrollid");
     slider.scrollLeft = slider.scrollLeft + 200;
   };
+
+  //auction_started socket event
+  useEffect(() => {
+    //var socket = io("https://code-auction-backend.up.railway.app/");
+    var socket = io("http://3.111.147.250:8000/");
+    socket.on("auction_started", function (data) {
+      toast.info(data, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    });
+
+    //auction_stopped_not_sold socket event
+    //var socket = io("https://code-auction-backend.herokuapp.com");
+    socket.on("auction_stopped_not_sold", function (data) {
+      toast.info(data, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    });
+
+    //auction_stopped_sold socket even
+    socket.on("auction_stopped_sold", function (data) {
+      toast.info(data, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    });
+
+    //auction_stopped_not_sold (no team has sufficient balance) socket event
+    socket.on("auction_stopped_not_sold", function (data) {
+      toast.info(data, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    });
+
+    //new_bid socket event
+    socket.on("new_bid", function (data) {
+      getBidQuestion();
+      toast.success(data, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    });
+  }, []);
+
   return (
     <>
       <div className="boxdiv">

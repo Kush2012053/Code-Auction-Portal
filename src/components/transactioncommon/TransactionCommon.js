@@ -19,7 +19,7 @@ const TransactionCommon = (props) => {
           </div>
         </div>
         <div className="hrdiv">
-          <hr style={{ borderColor: "#8b444d" }} />
+          <hr style={{ borderColor: props.color }} />
         </div>
       </div>
     </>

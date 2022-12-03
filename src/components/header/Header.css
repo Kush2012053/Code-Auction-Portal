@@ -46,3 +46,15 @@
   font-size: 0px;
   cursor: pointer;
 }
+.divoutermain {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.menuiconpage {
+  font-size: 26px;
+  color: #8b444d;
+  font-weight: bolder;
+  padding: 6px;
+  border: 2px solid #8b444d;
+}

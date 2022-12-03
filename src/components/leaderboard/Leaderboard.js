@@ -1,8 +1,8 @@
-import LeaderboardCommon from "../leaderboardcommon/LeaderboardCommon";
 import "./Leaderboard.css";
 import axios from "axios";
 import Api from "../../Api";
 import { useEffect, useState } from "react";
+import TransactionCommon from "../transactioncommon/TransactionCommon";
 
 const Leaderboard = () => {
   const [lead, setLead] = useState([]);
@@ -33,13 +33,16 @@ const Leaderboard = () => {
         <div className="generaltable">
           <div className="generaltop">
             <div className="general">
-              <div className="generaldiv">
-                <h2 className="headinggeneral">S.No.</h2>
+              <div className="generaldiv" style={{ width: "25%" }}>
+                <h2 className="headinggeneral">Rank</h2>
               </div>
-              <div className="generaldiv">
+              <div className="generaldiv" style={{ width: "25%" }}>
                 <h2 className="headinggeneral">Team Name</h2>
               </div>
-              <div className="generaldiv">
+              <div className="generaldiv" style={{ width: "25%" }}>
+                <h2 className="headinggeneral">Time</h2>
+              </div>
+              <div className="generaldiv" style={{ width: "25%" }}>
                 <h2 className="headinggeneral">Stars</h2>
               </div>
             </div>
@@ -47,10 +50,12 @@ const Leaderboard = () => {
           <div className="generalbottom">
             {lead.map((val) => {
               return (
-                <LeaderboardCommon
+                <TransactionCommon
                   first={val.rank}
                   second={val.team_name}
-                  third={val.score / 100}
+                  third={val.time_to_solve / 1000}
+                  fourth={val.score / 100}
+                  color="white"
                 />
               );
             })}

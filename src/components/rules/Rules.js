@@ -18,6 +18,7 @@ const Rules = () => {
     localStorage.removeItem("question");
     localStorage.removeItem("solveid");
     localStorage.removeItem("nameteam");
+    localStorage.removeItem("stars");
     navigate("/");
   };
 

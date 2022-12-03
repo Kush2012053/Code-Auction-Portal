@@ -4,10 +4,11 @@ import Auction from "./components/auction/Auction";
 import Leaderboard from "./components/leaderboard/Leaderboard";
 import Login from "./components/login/Login";
 import Rules from "./components/rules/Rules";
-import Solve from "./components/solve/Solve";
+//import Solve from "./components/solve/Solve";
 import Transaction from "./components/transaction/Transaction";
 import WithNav from "./components/withnav/WithNav";
 import WithoutNav from "./components/withoutnav/WithoutNav";
+import Creator from "./components/creator/Creator";
 
 function App() {
   return (
@@ -21,9 +22,10 @@ function App() {
             <Route element={<WithNav />}>
               <Route path="dashboard/rules" element={<Rules />} />
               <Route path="dashboard/auction" element={<Auction />} />
-              <Route path="dashboard/solve" element={<Solve />} />
+              {/*<Route path="dashboard/solve" element={<Solve />} />*/}
               <Route path="dashboard/leaderboard" element={<Leaderboard />} />
               <Route path="dashboard/transaction" element={<Transaction />} />
+              <Route path="dashboard/creator" element={<Creator />} />
             </Route>
           </Routes>
         </div>

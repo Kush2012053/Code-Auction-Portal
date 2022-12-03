@@ -59,6 +59,7 @@ const Login = () => {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("question", "");
       localStorage.setItem("solveid", "");
+      localStorage.setItem("stars", 0);
       navigate("dashboard/rules");
     }
   };

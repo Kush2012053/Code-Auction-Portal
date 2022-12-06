@@ -11,12 +11,14 @@ import beep from "../../images/beep.mpeg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import io from "socket.io-client";
+import Spinner from "react-spinner-material";
 
 const Auction = () => {
   const [allQuestions, setAllQuestions] = useState([]);
   const [eachQuestion, setEachQuestion] = useState({});
   const [getBidArray, setGetBidArray] = useState([]);
   const [bidValue, setBidValue] = useState();
+  const [bid, setBid] = useState(false);
 
   const play = () => {
     new Audio(beep).play();
@@ -64,6 +66,7 @@ const Auction = () => {
   };
 
   const placeBid = async () => {
+    setBid(true);
     const data = {
       bid_price: bidValue,
     };
@@ -72,6 +75,7 @@ const Auction = () => {
         headers: { Authorization: `Bearer ${localStorage.token}` },
       })
       .catch((err) => {
+        setBid(false);
         console.log(err);
         toast.info(err.response.data.message, {
           position: "top-center",
@@ -85,6 +89,7 @@ const Auction = () => {
         });
       });
     if (res) {
+      setBid(false);
       play();
       {
         /*toast.success(res.data.message, {
@@ -126,6 +131,7 @@ const Auction = () => {
 
   useEffect(() => {
     everyRender();
+    balancepoints();
   }, []);
 
   const slideLeft = () => {
@@ -214,7 +220,7 @@ const Auction = () => {
     });
     return () => {
       socket.disconnect();
-    }
+    };
   }, []);
 
   return (
@@ -359,7 +365,21 @@ const Auction = () => {
                 </div>
               </div>
               <ToastContainer />
-              <Click val="Place Bid" function={placeBid} />
+              {!bid && <Click val="Place Bid" function={placeBid} />}
+              {bid && (
+                <div className="clickdiv">
+                  <div className="innerclick" onClick={placeBid}>
+                    <h3 className="clickheading">
+                      <Spinner
+                        radius={20}
+                        color={"white"}
+                        stroke={3}
+                        visible={true}
+                      />
+                    </h3>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

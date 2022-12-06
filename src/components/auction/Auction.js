@@ -141,7 +141,7 @@ const Auction = () => {
   //auction_started socket event
   useEffect(() => {
     //var socket = io("https://code-auction-backend.up.railway.app/");
-    var socket = io("http://35.154.96.3:8000/");
+    var socket = io("https://code-auction-backend.brlakgec.com/");
     socket.on("auction_started", function (data) {
       toast.info(data, {
         position: "top-center",

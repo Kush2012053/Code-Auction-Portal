@@ -239,19 +239,41 @@ const Auction = () => {
                 </div>
                 <div className="questionscroll" id="scrollid">
                   {allQuestions.map((val) => {
-                    return (
-                      <>
-                        <div
-                          className="eachquestionscroll"
-                          onClick={() => {
-                            eachClickQuestion(val._id);
-                            balancepoints();
-                          }}
-                        >
-                          <h4 className="h4questionscroll">{val.name}</h4>
-                        </div>
-                      </>
-                    );
+                    if (val.status === "sold") {
+                      return (
+                        <>
+                          <div
+                            className="eachquestionscroll"
+                            onClick={() => {
+                              eachClickQuestion(val._id);
+                              balancepoints();
+                            }}
+                            style={{ backgroundColor: "#CAA692" }}
+                          >
+                            <h4 className="h4questionscroll">{val.name}</h4>
+                          </div>
+                        </>
+                      );
+                    }
+                    if (val.status !== "sold") {
+                      return (
+                        <>
+                          <div
+                            className="eachquestionscroll"
+                            onClick={() => {
+                              eachClickQuestion(val._id);
+                              balancepoints();
+                            }}
+                            style={{
+                              backgroundColor: "#7F2740",
+                              color: "white",
+                            }}
+                          >
+                            <h4 className="h4questionscroll">{val.name}</h4>
+                          </div>
+                        </>
+                      );
+                    }
                   })}
                 </div>
                 <div className="righticon">

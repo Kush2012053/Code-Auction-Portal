@@ -31,11 +31,13 @@ const Transaction = () => {
       <div className="transactiondiv">
         <div className="transactionheading">
           <div className="transactiontop">
-            <div className="history">
-              <h1>Transaction History : </h1>
+            <div className="eachtransheading">
+              <h1 className="history">Transaction History : </h1>
             </div>
-            <div className="remaining">
-              <h1>Remaining BRLEth: {localStorage.balancepoint}</h1>
+            <div className="eachtransheading">
+              <h1 className="remaining">
+                Remaining BRLEth: {localStorage.balancepoint}
+              </h1>
             </div>
           </div>
         </div>
